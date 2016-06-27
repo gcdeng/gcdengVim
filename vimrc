@@ -25,6 +25,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 " Powerline
 Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+" VIM-JAVASCRIPT
+Plugin 'pangloss/vim-javascript'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -46,6 +48,12 @@ set encoding=utf-8
 set laststatus=2
 set t_Co=256
 let g:Powerline_symbols= 'unicode'
+
+" vim-javascript {{{
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+
+" }}}
 
 " ---Colors---
 " Syntex Color Solarized
@@ -84,7 +92,7 @@ set wrap
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 " turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader> <space> :nohlsearch<CR>
 set ic
 
 " ---Folding---
