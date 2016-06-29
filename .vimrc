@@ -27,6 +27,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 " VIM-JAVASCRIPT
 Plugin 'pangloss/vim-javascript'
+" emmet
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,6 +44,10 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" emmet {{{
+let g:user_emmet_leader_key='<C-Z>'
+" }}}
 
 " ---Powerline---
 set encoding=utf-8
