@@ -13,12 +13,17 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" " different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
 " vim-colors-solarized
 Plugin 'altercation/vim-colors-solarized'
 " THE NERD TREE
@@ -29,6 +34,16 @@ Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 Plugin 'pangloss/vim-javascript'
 " emmet
 Plugin 'mattn/emmet-vim'
+" Auto-Indentation
+Plugin 'vim-scripts/indentpython.vim'
+" Auto-complete
+Plugin 'Valloric/YouCompleteMe'
+" Syntax Checking/Highlighting
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+" Super Searching (press Ctrl-P to enable the search)
+Plugin 'kien/ctrlp.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -45,19 +60,72 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" emmet {{{
-let g:user_emmet_leader_key='<C-Z>'
+" python {{{
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+" Flagging Unnecessary Whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+"python with virtualenv support
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"    execfile(activate_this, dict(__file__=activate_this))
+"EOF
+
+" make your code look pretty
+let python_highlight_all=1
+syntax on
+
 " }}}
 
-" ---Powerline---
+" Auto-complete {{{
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" }}}
+
+" emmet {{{
+let g:user_emmet_leader_key='<C-Z>'
+let g:user_emmet_mode='a'    "enable all function in all mode.
+" }}}
+
+" Powerline {{{
 set encoding=utf-8
 set laststatus=2
 set t_Co=256
 let g:Powerline_symbols= 'unicode'
+" }}}
 
 " vim-javascript {{{
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
+
+" }}}
+
+" Split Layouts {{{
+set splitbelow
+set splitright
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " }}}
 
@@ -76,10 +144,10 @@ set nocompatible
 set binary
 set noeol
 set scrolloff=3
-"set autoindent
+set autoindent
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
-set cursorcolumn
+" set cursorcolumn
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
@@ -108,6 +176,7 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
+set foldlevel=99
 
 " ---Movement---
 nnoremap j gj
@@ -122,7 +191,7 @@ nnoremap ^ <nop>
 nnoremap gV `[v`]
 
 " ---Leader Shortcuts---
-let mapleader=","       " leader is comma
+let mapleader="\<Space>"       " leader is space
 " jk is escape
 inoremap jk <esc>
 

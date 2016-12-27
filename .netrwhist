@@ -1,4 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/Users/ericdeng/Code/web/first-django'
 let g:netrw_dirhist_2='/Users/ericdeng/.vim'
+let g:netrw_dirhist_3='/Users/ericdeng/Code/web/Photo-web-app-using-Instagram-API-in-Node.js'
