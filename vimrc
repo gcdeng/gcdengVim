@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -37,7 +37,7 @@ Plugin 'mattn/emmet-vim'
 " Auto-Indentation
 Plugin 'vim-scripts/indentpython.vim'
 " Auto-complete
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 " Syntax Checking/Highlighting
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
@@ -232,7 +232,7 @@ noremap <silent> <Leader>w :call ToggleDisplayMove()<CR>
 
 let ToggleDisplayMove_Mode = 0
 
-function PhysicalLineMove()
+function! PhysicalLineMove()
     silent! nunmap <buffer> <Up>
     silent! nunmap <buffer> <Down>
     silent! nunmap <buffer> <Home>
@@ -244,7 +244,7 @@ function PhysicalLineMove()
     let g:ToggleDisplayMove_Mode = 0
 endfunction
 
-function DisplayedLineMove()
+function! DisplayedLineMove()
     noremap  <buffer> <silent> <Up>   gk
     noremap  <buffer> <silent> <Down> gj
     noremap  <buffer> <silent> <Home> g<Home>
@@ -256,7 +256,7 @@ function DisplayedLineMove()
     let g:ToggleDisplayMove_Mode = 1
 endfunction
 
-function ToggleDisplayMove()
+function! ToggleDisplayMove()
     if g:ToggleDisplayMove_Mode
         call PhysicalLineMove()
         echo "Move cursor now base on PHYSICAL LINE"
